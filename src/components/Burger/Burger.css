@@ -1,0 +1,22 @@
+.Burger {
+    display: flex;
+    text-align: center;
+    /* justify-content: center; */
+    /* align-items: center; */
+    flex-direction: column;
+    width: 500px;
+    height: 500px;
+    margin: 10px auto;
+    border: 1px solid black;
+    overflow-y: auto;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+/* 
+.Burger > div {
+    box-sizing: content-box;
+    background-color: red;
+    width: 300px;
+    min-height: 100px;
+    margin: 10px;
+} */
