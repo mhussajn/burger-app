@@ -19,6 +19,7 @@ const burger = props => {
       <BurgerIngredient type={"bread-top"} />
       {ingredients}
       <BurgerIngredient type={"bread-bottom"} />
+      <h1>Burger Cost: {props.price.toFixed(2)}$</h1>
     </div>
   );
 };

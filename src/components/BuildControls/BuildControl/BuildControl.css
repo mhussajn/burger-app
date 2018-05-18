@@ -1,0 +1,73 @@
+.Control {
+    display: flex;
+    height: 40px;
+    justify-content: space-between;
+    align-items: center;    
+    margin: 5px 0;
+}
+
+.Number {
+    font-size: 2.2rem;
+    align-items: center;
+    text-align: center;
+    height: 40px;
+    width: 50px;
+}
+
+.Label {
+    padding: 10px;
+    font-weight: bold;
+    width: 70px;
+}
+
+.Less {
+    cursor: pointer;
+    padding: 5px 10px;
+    color: white;
+    background-color: #EF476F;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 5px rgb(94, 87, 89);
+    outline: none;
+}
+
+.Less:hover {
+    background-color:  rgb(160, 46, 72);
+}
+
+.Less:active {
+    background-color:  rgb(160, 46, 72);
+    box-shadow: 0 3px rgb(61, 57, 58);
+    transform: translateY(2px)
+}
+
+.Less:disabled {
+    cursor: not-allowed;
+    padding: 5px 10px;
+    color: rgb(119, 119, 119);
+    background-color: rgb(158, 158, 158);
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 5px rgb(138, 138, 138);
+}
+
+.More {
+    cursor: pointer;
+    padding: 5px 10px;
+    color: white;
+    background-color: #06D6A0;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 5px rgb(102, 110, 108);
+    outline: none;
+}
+
+.More:hover {
+    background-color:  rgb(4, 133, 98);
+}
+
+.More:active {
+    background-color:  rgb(4, 133, 98);
+    box-shadow: 0 3px rgb(49, 53, 52);
+    transform: translateY(2px)
+}
