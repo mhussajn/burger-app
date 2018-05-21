@@ -1,6 +1,22 @@
-import React from "react";
+import React, { Component } from 'react';
 import classes from './Modal.css';
 
-const modal = props => <div style={{opacity: props.show ? '1' : '0'}} className={classes.Modal}>{props.children}</div>;
+class Modal extends Component {
 
-export default modal;
+    shouldComponentUpdate (nextProps,nextState) {
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children
+    }
+
+    componentWillUpdate () {
+        console.log("comp will update")
+    }
+
+    render () {
+
+        return (
+            <div style={{opacity: this.props.show ? '1' : '0'}} className={classes.Modal}>{this.props.children}</div>
+        )
+    }
+};
+
+export default Modal;
