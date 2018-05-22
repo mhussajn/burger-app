@@ -20,10 +20,13 @@ class burgerBuilder extends Component {
   };
 
   componentDidMount() {
-    axios.get("https://burger-app-db66f.firebaseio.com/ingredients.json").then(response => {
-      console.log(response);
-      this.setState({ ingredients: response.data });
-    });
+    console.log(this.props);
+    axios
+      .get("https://burger-app-db66f.firebaseio.com/ingredients.json")
+      .then(response => {
+        console.log(response);
+        this.setState({ ingredients: response.data });
+      });
   }
 
   addIngredientHandler = ingredientType => {
@@ -57,31 +60,20 @@ class burgerBuilder extends Component {
   };
 
   orderConfirmedHandler = () => {
-    this.setState({ loading: true });
+ 
+    const queryParams = [];
+    for (let i in this.state.ingredients) {
+      queryParams.push(
+        encodeURIComponent(i) +
+          "=" +
+          encodeURIComponent(this.state.ingredients[i])
+      );
+    }
+    queryParams.push('price='+this.state.totalPrice);
+    const queryString = queryParams.join('&');
 
-    const data = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: "Jan",
-        surName: "Kowalski",
-        email: "jan.kowalski@gmail.com",
-        phone: "35782255",
-        address: {
-          city: "Warszawa",
-          street: "Warszawska 35"
-        },
-        deliveryTime: "ASAP"
-      }
-    };
+    this.props.history.push({pathname: "/checkout", search: '?' + queryString});
 
-    axios
-      .post("/orders.json", data)
-      .then(response => {
-        this.setState({ loading: false, purchasing: false });
-        console.log(response);
-      })
-      .catch(error => console.log(error));
   };
 
   render() {
@@ -92,10 +84,12 @@ class burgerBuilder extends Component {
     if (this.state.ingredients) {
       burger = (
         <React.Fragment>
-          <Burger
-            price={this.state.totalPrice}
-            ingredients={this.state.ingredients}
-          />
+          <div style={{ width: "500px", height: "500px", margin: "10px auto" }}>
+            <Burger
+              price={this.state.totalPrice}
+              ingredients={this.state.ingredients}
+            />
+          </div>
           <BuildControls
             orderClicked={this.orderClickedHandler}
             ingredients={this.state.ingredients}
