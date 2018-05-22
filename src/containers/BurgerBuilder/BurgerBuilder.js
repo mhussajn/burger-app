@@ -21,12 +21,10 @@ class burgerBuilder extends Component {
 
   componentDidMount() {
     console.log(this.props);
-    axios
-      .get("https://burger-app-db66f.firebaseio.com/ingredients.json")
-      .then(response => {
-        console.log(response);
-        this.setState({ ingredients: response.data });
-      });
+    axios.get("/ingredients.json").then(response => {
+      console.log(response);
+      this.setState({ ingredients: response.data });
+    });
   }
 
   addIngredientHandler = ingredientType => {
@@ -60,7 +58,6 @@ class burgerBuilder extends Component {
   };
 
   orderConfirmedHandler = () => {
- 
     const queryParams = [];
     for (let i in this.state.ingredients) {
       queryParams.push(
@@ -69,11 +66,13 @@ class burgerBuilder extends Component {
           encodeURIComponent(this.state.ingredients[i])
       );
     }
-    queryParams.push('price='+this.state.totalPrice);
-    const queryString = queryParams.join('&');
+    queryParams.push("price=" + this.state.totalPrice);
+    const queryString = queryParams.join("&");
 
-    this.props.history.push({pathname: "/checkout", search: '?' + queryString});
-
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?" + queryString
+    });
   };
 
   render() {

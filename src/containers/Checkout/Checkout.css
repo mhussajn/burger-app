@@ -1,19 +1,14 @@
 .Checkout {
-    width: 800px;
-    height: 600px;
-    margin: 0 auto;
-    background-color: white;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .Checkout .Burger {
-    width: 300px;
-    height: 300px;
-}
-
-.Checkout input {
-    width: 100%
+  width: 300px;
+  height: 300px;
 }

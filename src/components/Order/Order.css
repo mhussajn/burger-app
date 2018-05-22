@@ -1,0 +1,24 @@
+.Order {
+  display: flex;
+  width: 500px;
+  height: auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  margin: 10px;
+  justify-content: space-evenly;
+}
+
+.Order ul {
+  list-style: none;
+}
+
+.Order li {
+  text-transform: capitalize;
+}
+
+.Order .Burger {
+  width: 300px;
+  height: 300px;
+}
