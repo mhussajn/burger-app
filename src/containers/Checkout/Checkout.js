@@ -5,6 +5,8 @@ import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Input from "../../components/UI/Input/Input";
 
+import {connect} from 'react-redux';
+
 class Checkout extends Component {
   state = {
     orderForm: {
@@ -88,24 +90,9 @@ class Checkout extends Component {
         touched: false
       }
     },
-    ingredients: { meat: 0, cheese: 0, salad: 0, bacon: 0 },
-    totalPrice: 0,
     loading: false
   };
-
-  componentDidMount() {
-    const query = new URLSearchParams(this.props.location.search);
-    const ingredients = {};
-    for (let param of query.entries()) {
-      if (param[0] === "price") {
-        this.setState({ totalPrice: +param[1] });
-      } else {
-        ingredients[param[0]] = +param[1];
-      }
-    }
-    this.setState({ ingredients: ingredients });
-  }
-
+  
   checkValidity(value, validation) {
     let valid = true;
     if (validation.required) {
@@ -126,13 +113,13 @@ class Checkout extends Component {
 
   orderSubmitHandler = event => {
     event.preventDefault();
-    console.log(this.state.ingredients);
+    console.log(this.props.ingredients);
 
     this.setState({ loading: true });
 
     const data = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
+      ingredients: this.props.ingredients,
+      price: this.props.totalPrice,
       customer: {
         name: this.state.orderForm.name.value,
         address: {
@@ -203,8 +190,8 @@ class Checkout extends Component {
       <React.Fragment>
         <div className={classes.Burger}>
           <Burger
-            ingredients={this.state.ingredients}
-            price={this.state.totalPrice}
+            ingredients={this.props.ingredients}
+            price={this.props.totalPrice}
           />
         </div>
         <div className={classes.Burger}>
@@ -222,4 +209,15 @@ class Checkout extends Component {
   }
 }
 
-export default Checkout;
+const mapStateToProps = (state) => {
+  return {
+    ingredients: state.ingredients,
+    totalPrice: state.totalPrice
+  }
+}
+
+export default connect(mapStateToProps)(Checkout);
+
+
+
+
