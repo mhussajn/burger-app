@@ -1,27 +1,20 @@
 import React, { Component } from "react";
-// import axios from "../../axios-orders";
 import { connect } from "react-redux";
-import * as actionTypes from "../../store/actions";
-
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/OrderSummary/OrderSummary";
 import Backdrop from "../../components/UI/Backdrop/Backdrop";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import * as actionCreators from "../../store/actions/index";
 
 class burgerBuilder extends Component {
   state = {
-    purchasing: false,
-    loading: false
+    purchasing: false
   };
 
   componentDidMount() {
-    console.log(this.props);
-    // axios.get("/ingredients.json").then(response => {
-    //   console.log(response);
-    //   this.setState({ ingredients: response.data });
-    // });
+    this.props.onInitIngredients();
   }
 
   orderClickedHandler = () => {
@@ -67,10 +60,10 @@ class burgerBuilder extends Component {
       );
     }
 
-    if (this.state.loading) {
-      console.log("loading");
-      orderSummary = <Spinner />;
-    }
+    // if (this.state.loading) {
+    //   console.log("loading");
+    //   orderSummary = <Spinner />;
+    // }
 
     return (
       <React.Fragment>
@@ -95,15 +88,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAddIngredient: ingredientType =>
-      dispatch({
-        type: actionTypes.ADD_INGREDIENT,
-        ingredientType: ingredientType
-      }),
+      dispatch(actionCreators.addIngredient(ingredientType)),
     onRemoveIngredient: ingredientType =>
-      dispatch({
-        type: actionTypes.REMOVE_INGREDIENT,
-        ingredientType: ingredientType
-      })
+      dispatch(actionCreators.removeIngredient(ingredientType)),
+    onInitIngredients: () => dispatch(actionCreators.setIngredientsAsync())
   };
 };
 

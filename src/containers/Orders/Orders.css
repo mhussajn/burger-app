@@ -1,8 +1,7 @@
 .Orders {
     margin: 0 auto;
-    width: 1200px;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     justify-content: center;
 }
